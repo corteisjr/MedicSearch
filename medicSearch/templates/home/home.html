@@ -13,7 +13,58 @@
   
 
 {% block content %}
-    <div id="content">Ola mundo</div>
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 offset-sm-0 offset-md-3 offset-md-3">
+                    <form action="{% url 'medics' %}" method="get">
+                        <h3 class="text-center">Buscar um médico</h3>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Buscar por nome">
+                            </div>
+                        </div>
+                        <!-- Especialidade e provincia -->
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <select class="form-control" name="speciality">
+                                    <option value="0" selected disabled>Selecione uma especialidade</option>
+                                    <option value="1">Nutricionista</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <select name="province" class="form-control">
+                                    <option value="0" selected disabled>Selecione uma província</option>
+                                    <option value="1">Tete</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Cidade e bairro -->
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <select class="form-control" name="city">
+                                    <option value="0" selected disabled>Selecione uma cidade</option>
+                                    <option value="1">Moatize</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <select name="neighborhood" class="form-control">
+                                    <option value="0" selected disabled>Selecione um bairro</option>
+                                    <option value="1">Bairro 4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group mb-0"> 
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>                   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
     
 
