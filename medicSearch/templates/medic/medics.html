@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Médicos
+{% endblock title %}
+
+
+{% block content %}
+        <div id="content">
+            <div class="container">
+                <div class="alert alert-info">Foram encontrados: {{medics | length }} médico (s)</div>
+            
+                <div class="row">
+                
+                    {% for medic in medics %}
+                        <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="card mb-4">
+                                <div class="image-circle" style="background-image: url('/media/{{medic.image}}');"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ medic.user.get_full_name }}</h5>
+                                    <h6>Nota : {{medic.show_scoring_average}} <i class="fa fa-star"></i></h6>
+
+                                    <ul class="specialties">
+                                        {% for speciality in medic.specialties.all %}
+                                            <li>{{speciality}}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                                    <div class="address mb-2" title="{{medic.addresses.first.address}}" alt="{{medic.addresses.first.address}}">
+                                        {{medic.addresses.first.address | default:"Nenhum endereço." | slice:":15"}}...
+                                    </div>
+
+                                    <a href={% url 'profile' medic.user.id %} class="btn btn-primary btn-card">Ver médico</a>
+                                    
+                                    {% if user.is_authenticated %}
+                                        <button class="btn btn-danger btn-card"><i class="fa fa-heart"></i> Favoritos</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div> 
+                      <!--Paginação  -->
+                      <div class="row">
+                          <nav class="navigation" aria-label="Page navigation">
+                              <ul class="pagination">
+                                  
+                                  {% if medics.has_previous %}
+                                      <li class="page-item"> <a class="page-link" href="?page=1{{ parameters }}">&laquo; Primeiro</a></li>
+                                      <li class="page-item"> <a class="page-link" href="?page={{medic.previous_page_number }} {{ parameters }}">Anterior</a></li>
+                                  {% endif %}
+                                  <li class="page-item"><a href="#" class="page-link">Página {{medics.number }} de {{medics.paginator.num_pages}}.</a></li>
+                                  {% if medics.has_next  %}
+                                      <li class="page-item"><a href="?page={{ medics.next_page_number }} {{ parameters }}" class="page-link">Próximo</a></li>
+                                      <li class="page-item"><a href="?page={{ medics.paginator.num_pages }} {{ parameters }}" class="page-link">Último &raquo;</a></li>
+                                  {% endif %}
+                                      
+                                      
+                              </ul>
+                          </nav>
+                      </div>
+            </div>
+        </div>
+{% endblock content %}

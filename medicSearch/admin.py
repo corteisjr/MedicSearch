@@ -2,7 +2,6 @@ from django.contrib import admin
 from  .models import *
 
 class ProfileAdmin(admin.ModelAdmin):
-    readonly_fields = ('user', )
     # Cria um filtro de hierquia com datas
     data_hierarchy = 'created_at'
     #Elementos que desejamos que sejam listados
