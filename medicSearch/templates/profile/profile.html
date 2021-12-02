@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Médicos
+{% endblock title %}
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock styles %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-3" id="profile-area">
+                    <div id="image-profile" style="background-image: url('/media/{{profile.image}}');"></div>
+                    
+                    {% if profile.role == 1 %}
+                        <p class="badge badge-primary text-center"></p>
+                    {% endif %}
+                        
+                </div>
+                <div class="col-xs-12 col-md-9" id="favorites-area"></div>
+                <div class="col-xs-12 col-md-3" id="addresses-area"></div>
+                <div class="col-xs-12 col-md-6" id="ratings-area"></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+    
