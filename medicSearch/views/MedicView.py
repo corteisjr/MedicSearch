@@ -1,5 +1,5 @@
 from django.core import paginator
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from medicSearch.models import  Profile
 from django.db.models import Q
 #biblioteca para paginação
@@ -42,3 +42,44 @@ def list_medics_view(request):
     }
     
     return render(request, template_name='medic/medics.html', context=context, status=200)
+    
+def add_favorite_view(request):
+    page = request.POST.get("page")
+    name = request.POST.get("name")
+    speciality = request.POST.get('speciality')
+    neighborhood = request.POST.get("neighborhood")
+    city = request.POST.get("city")
+    province = request.POST.get("province")
+    id = request.POST.get("id")
+    
+    try:
+        profile = Profile.objects.filter(user=request.user).first()
+        medic = Profile.objects.filter(user__id=id).first()
+        profile.favorites.add(medic.user)
+        profile.save()
+        msg = "Favorito adicionado com sucesso."
+        _type = "success"
+        
+    except Exception as e:
+        print("Erro %s" % e)
+        msg = "Um erro ocorreu ao salvar o médico nos favoritos"
+        _type = "danger"
+        
+    if page:
+        arguments = "?page=%s" % (page)
+    else:
+        arguments = "?page=1"
+    if name:
+        arguments += "&name=%s" % (name)
+    if speciality:
+        arguments += "&speciality=%s" % (speciality)
+    if neighborhood:
+        arguments += "&neighborhood=%s" % (neighborhood)
+    if city:
+        arguments += "&city=%s" % (city)
+    if province:
+        arguments += "&province=%s" % (province)
+    
+    arguments += "&msg=%s&type=%s" % (msg, _type)    
+        
+    return redirect(to='/medic/%s'  % arguments )

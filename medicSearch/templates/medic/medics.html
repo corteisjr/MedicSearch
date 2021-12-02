@@ -11,7 +11,11 @@
         <div id="content">
             <div class="container">
                 <div class="alert alert-info">Foram encontrados: {{medics | length }} médico (s)</div>
-            
+                
+                {% if request.GET.msg %}
+                    <div class="alert alert-{{request.GET.type}}">{{request.GET.msg}}</div>
+                {% endif %}
+                    
                 <div class="row">
                 
                     {% for medic in medics %}
@@ -35,7 +39,17 @@
                                     <a href={% url 'profile' medic.user.id %} class="btn btn-primary btn-card">Ver médico</a>
                                     
                                     {% if user.is_authenticated %}
+                                    <form action="/medic/favorite"  method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{medic.user.id}}">
+                                        <input type="hidden" name="page" value="{{request.GET.page}}">
+                                        <input type="hidden" name="name" value="{{request.GET.name}}">
+                                        <input type="hidden" name="speciality"  value="{{request.GET.speciality}}">
+                                        <input  type="hidden" name="neighborhood"  value="{{request.GET.neighborhood}}">
+                                        <input type="hidden" name="city" value="{{request.GET.city}}">
+                                        <input type="hidden" name="province" value="{{request.GET.province}}">
                                         <button class="btn btn-danger btn-card"><i class="fa fa-heart"></i> Favoritos</button>
+                                    </form>
                                     {% endif %}
                                 </div>
                             </div>
