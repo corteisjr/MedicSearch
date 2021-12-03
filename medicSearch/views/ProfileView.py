@@ -10,7 +10,7 @@ def list_profile_view(request, id=None):
     elif id is not None:
         profile = Profile.objects.filter(user__id=id).first()
     elif not request.user.is_authenticated:
-        return redirect(to='/')
+        return redirect(to=' /')
     
     favorites = profile.show_favorites()
     if len(favorites) > 0:

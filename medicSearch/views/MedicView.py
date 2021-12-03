@@ -34,7 +34,7 @@ def list_medics_view(request):
         medics = paginator.get_page(page)
         
     get_copy = request.GET.copy()
-    parameters = get_copy.pop('page', True ) and get_copy.urlencode()
+    parameters = get_copy.pop('page',True ) and get_copy.urlencode()
             
     context = {
         'medics': medics,
@@ -66,20 +66,20 @@ def add_favorite_view(request):
         _type = "danger"
         
     if page:
-        arguments = "?page=%s" %page
+        arguments = '?page=%s' % (page)
     else:
-        arguments = "?page=1"
+        arguments = '?page=1'
     if name:
-        arguments += "&name=%s" %name
-    if speciality:
-        arguments += "&speciality=%s" %speciality
+        arguments += ' &name=%s' % name
+    if speciality:       
+        arguments +=  '&speciality=%s' % speciality
     if neighborhood:
-        arguments += "&neighborhood=%s" %neighborhood
+        arguments += '&neighborhood=%s' % neighborhood
     if city:
-        arguments += "&city=%s" %city
+        arguments += '&city=%s' % city
     if province:
-        arguments += "&province=%s" %province
+        arguments += '&province=%s' % province
     
-    arguments += "&msg=%s&type=%s" % (msg, _type)    
+    arguments += '&msg=%s&type=%s' % (msg,  _type )    
         
-    return  redirect(to='/medic/%s'  % arguments)
+    return  redirect(to='/medic/%s'  % arguments )

@@ -19,13 +19,38 @@
                     <div id="image-profile" style="background-image: url('/media/{{profile.image}}');"></div>
                     
                     {% if profile.role == 1 %}
-                        <p class="badge badge-primary text-center"></p>
+                        <p class="badge badge-primary text-center" id="badge-role"><i class="fa fa-building"></i> Administrador</p>
+                        {% elif  profile.role == 2 %}
+                            <p class="badge badge-primary text-center" id="badge-role"><i class="fa fa-user-md"></i> Doctor(a) </p>
+                        {% else %}
+                            <p class="badge badge-primary text-center" id="badge-role"><i class="fa fa-user"></i> Paciente</p>
+                    {% endif %}
+
+                    
+                    {% if profile.user.id == request.user.id  %}
+                        <a href="#" id="icon-edit"><i class="fa fa-edit"></i></a>
                     {% endif %}
                         
+                      <ul class="list-group">
+                          <li class="list-group-item">Nome: {{profile.user.get_full_name | default:"Sem nome"}}</li>
+                          <li class="list-group-item">Usuário: {{profile.user.username | default:"Sem usuário"}}</li>
+                          <li class="list-group-item">Email: {{profile.user.email | default:"Sem e-mail"}}</li>
+                          <li class="list-group-item">Nascimento: {{profile.birthday | date:'d/m/y' | default:"Sem data"}}</li>
+
+                          
+                          {% if profile.role == 2 %}
+                              <li class="list-group-item">Nota: {{profile.show_scoring_average }}</li>
+                              <li class="list-group-item">Especialidades: {{ profile.specialties.all | join:". "}}</li>
+                          {% endif %}
+                      </ul>  
                 </div>
-                <div class="col-xs-12 col-md-9" id="favorites-area"></div>
-                <div class="col-xs-12 col-md-3" id="addresses-area"></div>
-                <div class="col-xs-12 col-md-6" id="ratings-area"></div>
+                
+                {% if profile.role == 1 or profile.roel == 3 %}
+                    <div class="col-xs-12 col-md-9" id="favorites-area"></div>    
+                    {% else %}
+                    <div class="col-xs-12 col-md-3" id="addresses-area"></div>
+                    <div class="col-xs-12 col-md-6" id="ratings-area"></div>
+                {% endif %}                
             </div>
         </div>
     </div>
