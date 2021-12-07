@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from medicSearch.models import Profile
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
-from medicSearch.forms.UserProfileForm import UserProfileForm
+from medicSearch.forms.UserProfileForm import UserForm, UserProfileForm
 
 
 def list_profile_view(request, id=None):
@@ -37,9 +37,14 @@ def list_profile_view(request, id=None):
 def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     profileForm = UserProfileForm(instance=profile)
+    #cria instancia da classe UserForm
+    userForm = UserForm(instance=request.user)
+    
+    
     
     context = {
-        'profileForm': profileForm
+        'profileForm': profileForm,
+        'userForm':  userForm
     }
     
     return render(request, template_name='user/profile.html', context=context, status=200)

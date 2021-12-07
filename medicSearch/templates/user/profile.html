@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pefil{% endblock title %}
+ 
+ {% block styles %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock styles %}
+
+ 
+ {% block content %}
+     <div id="content">
+         <div class="container-fluid">
+            <div class="row">
+                <form action="" class="col-md-6 col-lg-6 offset-md-3 offset-lg-4">
+                    <div class="row">
+                        {% csrf_token %}
+                        
+                        {% for f in userForm   %}
+                            
+                            {% if not f.is_hidden %}
+                                <div class="form-group col-md-6">
+                                    {{ f.label }}
+                                    {{ f }}
+                                </div>
+                                {% else %}
+                                    {{ f }}
+                            {% endif %}           
+                        {% endfor %}
+                            
+                        {% for f  in profileForm %}
+                            
+                            {% if not f.is_hidden %}
+                                <div class="form-group col-md-6">
+                                    {{ f.label }}
+                                    {{ f }}
+                                </div>
+                                    {% else %}
+                                        {{ f }}
+                            {% endif %}                               
+                        {% endfor %}                           
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>    
+         </div>
+     </div>
+ {% endblock content %}
+     
+        
