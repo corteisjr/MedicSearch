@@ -10,7 +10,12 @@
      <div id="content">
          <div class="container-fluid">
             <div class="row">
-                <form action="" class="col-md-6 col-lg-6 offset-md-3 offset-lg-4">
+                <form action="" class="col-md-6 col-lg-6 offset-md-3 offset-lg-4" method="POST" enctype="multipart/form-data">
+                    
+                    {% if message is not None %}
+                        <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+                    {% endif %}
+                        
                     <div class="row">
                         {% csrf_token %}
                         
@@ -20,6 +25,11 @@
                                 <div class="form-group col-md-6">
                                     {{ f.label }}
                                     {{ f }}
+                                    
+                                    {% for error in f.errors %}
+                                        <div class="invalid-feedback" style="display: initial;">{{ error }}</div>
+                                    {% endfor %}
+                                        
                                 </div>
                                 {% else %}
                                     {{ f }}
@@ -32,6 +42,11 @@
                                 <div class="form-group col-md-6">
                                     {{ f.label }}
                                     {{ f }}
+                                    
+                                    {% for error in f.errors %}
+                                        <div class="inavlid-feedback" style="display: initial;">{{ error }}</div>
+                                    {% endfor %}
+                                        
                                 </div>
                                     {% else %}
                                         {{ f }}
