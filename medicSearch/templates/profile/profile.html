@@ -42,6 +42,12 @@
                               <li class="list-group-item">Nota: {{profile.show_scoring_average }}</li>
                               <li class="list-group-item">Especialidades: {{ profile.specialties.all | join:". "}}</li>
                           {% endif %}
+                          
+                          {% if profile.role == 2 and request.user.is_authenticated %}
+                              <li class="list-group-item">
+                                  <a href="{% url 'rate-medic' profile.user.id %}" class="btn btn-warning"><i class="fa fa-star"></i></a>
+                              </li>
+                          {% endif %}
                       </ul>  
                 </div>
                 
