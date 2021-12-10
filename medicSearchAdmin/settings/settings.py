@@ -140,3 +140,9 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY")
 
 
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_URL = '/logout'
+LOGOUT_REDIRECT_URL = '/login'
+

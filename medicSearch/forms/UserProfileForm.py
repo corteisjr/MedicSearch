@@ -12,10 +12,9 @@ class UserProfileForm(ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['user', 'role', 'birthday', 'image']
+        fields = ['role', 'birthday', 'image']
         
     widgets = {
-        'user': forms.HiddenInput(),
         'role': forms.Select(attrs={'class': "form-control"}),
         'birthday': forms.DateInput(attrs={'class': "form-control", "type": "date"}),
         'image': forms.FileInput(attrs={'class': 'form-control'})
@@ -29,6 +28,6 @@ class UserForm(ModelForm):
             'username': forms.TextInput(attrs={'class': "form-control"}),
             'email': forms.EmailInput(attrs={'class': "form-control"}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': "form-control"})
+            'last_name': forms.TextInput(attrs={'class': "form-control"}), 
             
         }

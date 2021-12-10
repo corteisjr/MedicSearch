@@ -19,13 +19,13 @@
                 <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-home"></i>Home</a></li>
                 
                 {% if user.is_authenticated  %}
-                    <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-user"></i> Perfil</a></li>
-                    <li class="nav-item"><a href="#"  class="nav-link"><i class="fa fa-edit"></i> Editar Perfil</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-user"></i> Perfil</a></li>
+                    <li class="nav-item"><a href="{% url 'edit-profile' %}"  class="nav-link"><i class="fa fa-edit"></i> Editar Perfil</a></li>
                     <li class="nav-item"><a href="#"  class="nav-link"><i class="fa fa-sign-out"></i> Sair</a></li>
 
                 {% else %}
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-sign-in"></i>Entrar</a> </li>
-                    <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-edit"></i>Registrar</a> </li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class="fa fa-sign-in"></i>Entrar</a> </li>
+                    <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class="fa fa-edit"></i>Registrar</a> </li>
                 {% endif %}
             </ul>
         </nav>
