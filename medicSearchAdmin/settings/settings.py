@@ -158,3 +158,8 @@ import django_heroku
 django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
+#google Keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '311155256529-4jce58n951i4jevsm19mmgalkm30305c.apps.googleusercontent.com'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
