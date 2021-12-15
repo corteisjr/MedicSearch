@@ -157,3 +157,13 @@ AUTHENTICATION_BACKENDS = [
 import django_heroku
 django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import socket
+
+if socket.gethostname() == "heroku":
+    DEBUG = False
+    ALLOWED_HOSTS = [".http://medicsearch.herokuapp.com/",]
+    ...
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
