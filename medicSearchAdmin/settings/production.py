@@ -1,9 +1,9 @@
 import os
 from .settings import *
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://medicsearch.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
