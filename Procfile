@@ -1,1 +1,1 @@
-web: gunicorn medicSearchAdmin.wsgi
+web: gunicorn medicSearch.wsgi
