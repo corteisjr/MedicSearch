@@ -1,7 +1,7 @@
 import os
 from .settings import *
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['.http://medicsearch.herokuapp.com/']
