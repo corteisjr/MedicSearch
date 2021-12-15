@@ -1,1 +1,1 @@
-web: gunicorn medicSearch.wsgi
+web: gunicorn medicSearch.wsgi --log-file -
