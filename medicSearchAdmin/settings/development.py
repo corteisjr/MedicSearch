@@ -4,7 +4,7 @@ from .settings import *
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://medicsearch.herokuapp.com/']
 
 DATABASES = {
     'default': {
