@@ -45,7 +45,7 @@
                           
                           {% if profile.role == 2 and request.user.is_authenticated %}
                               <li class="list-group-item">
-                                  <a href="{% url 'rate-medic' profile.user.id %}" class="btn btn-warning"><i class="fa fa-star"></i></a>
+                                  <a href="{% url 'rate-medic' profile.user.id %}" class="btn btn-warning"><i class="fa fa-star">Avaliar</i></a>
                               </li>
                           {% endif %}
                       </ul>  
