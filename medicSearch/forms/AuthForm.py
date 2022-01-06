@@ -14,3 +14,7 @@ class RegisterForm(forms.Form):
 #recoperar senha
 class RecoveryForm(forms.Form):
     email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))    
+
+# Mudar password
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.template import exceptions
 from medicSearch.models.Profile import Profile
-from medicSearch.forms.AuthForm import LoginForm, RegisterForm, RecoveryForm
+from medicSearch.forms.AuthForm import LoginForm, RegisterForm, RecoveryForm, ChangePasswordForm
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -162,3 +162,45 @@ def send_email(profile):
         )
     except:
         raise Exception
+    
+def change_password(request, token):
+    profile = Profile.objects.filter(token=token).first()
+    changePasswordForm = ChangePasswordForm()
+    message = None
+    link_text = 'Solicitar recuperação de senha'
+    link_href = '/recovery'
+    
+    if profile is not None:
+        if request.method == 'POST':
+            changePasswordForm = ChangePasswordForm(request.POST)
+            if changePasswordForm.is_valid():
+                profile.user.set_password(request.POST['password'])
+                profile.token = None
+                profile.user.save()
+                profile.save()
+                message = {
+                    'type': 'success',
+                    'text': 'Senha alterada com sucesso!!!'
+                }
+                link_text = 'Login'
+                link_href ='/login'
+            else:
+                message = {
+                    'type': 'danger',
+                    'text': 'Formulário inválido.'
+                }
+        else:
+            message = {
+                'trype': 'danger',
+                'text': 'Token inválido. Solicite novamente.'
+            }
+    context = {
+        'form': changePasswordForm,
+        'message': message,
+        'title': 'Alterar senha',
+        'button_text': 'Alterar',
+        'link_text': link_text,
+        'link_href': link_href
+    }
+    
+    return render(request, template_name='auth/auth.html', context=context, status=200)
